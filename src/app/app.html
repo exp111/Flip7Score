@@ -20,19 +20,16 @@
     </div>
 
     <div class="players">
-      <div class="player-row">
-        <div class="avatar" [style.background]="'#9183A5'">JANE</div>
-        <div class="score">0</div>
-        <div class="plus">+</div>
-        <input class="input" type="text"/>
-      </div>
-
-      <div class="player-row">
-        <div class="avatar" [style.background]="'#585A65'">TIM</div>
-        <div class="score">0</div>
-        <div class="plus">+</div>
-        <input class="input" type="text"/>
-      </div>
+      @for (player of players; track player) {
+        <div class="player-row">
+          <div class="avatar" [style.background]="player.color">{{ player.name }}</div>
+          <div class="score">
+            {{ player.score }}
+          </div>
+          <div class="plus">+</div>
+          <input class="input" type="text" inputmode="numeric" maxlength="3"/>
+        </div>
+      }
     </div>
   </div>
 

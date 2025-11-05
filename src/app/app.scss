@@ -97,12 +97,14 @@ $accent: #F9DD69;
   flex-grow: 1;
   padding: 16px;
   border-radius: 0 0 4px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
   .player-row {
-    display: grid;
-    grid-template-columns: 60px 40px 30px 1fr;
+    display: flex;
+    gap: 16px;
     align-items: center;
-    margin-bottom: 15px;
   }
 
   .avatar {
@@ -113,7 +115,8 @@ $accent: #F9DD69;
     display: flex;
     align-items: center;
     justify-content: center;
-    // font
+    // text
+    text-transform: uppercase;
     font-weight: bold;
     color: $panel;
     font-size: 19px;
@@ -121,9 +124,8 @@ $accent: #F9DD69;
   }
 
   .score {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
-    text-align: center;
   }
 
   .plus {
@@ -133,9 +135,17 @@ $accent: #F9DD69;
   }
 
   .input {
-    height: 34px;
-    border: 2px solid #e9e9c8;
-    border-radius: 6px;
+    width: 100%;
+    padding: 16.5px 14px;
+    background: none;
+    // text
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+
+    &:focus {
+      outline: $primary;
+    }
   }
 }
 
