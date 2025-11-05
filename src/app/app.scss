@@ -36,7 +36,7 @@ $accent: #F9DD69;
 
 .top-controls {
   background: $primary;
-  padding: 8px;
+  padding: 0.5rem;
 
   border-radius: 4px 4px 0 0;
 
@@ -44,16 +44,18 @@ $accent: #F9DD69;
   gap: 6px;
   align-items: center;
 
-  .tab {
+  & > .btn {
     flex: 1;
     border: none;
-    background: #e1eff7;
+    background: $bg;
+    color: $panel;
     padding: 6px;
     border-radius: 6px;
     font-weight: bold;
+    text-transform: uppercase;
+
     &.active {
-      background: $primary;
-      color: white;
+      border: 2px solid white;
     }
   }
 
@@ -63,12 +65,18 @@ $accent: #F9DD69;
     align-items: center;
     gap: 4px;
 
-    .nav {
+    .status {
+      text-transform: uppercase;
+      color: $panel;
+    }
+
+    .btn {
+      background: transparent;
       border: none;
-      background: #e1eff7;
-      border-radius: 4px;
-      padding: 4px 6px;
+      color: $panel;
       cursor: pointer;
+      font-family: Arial, serif;
+      font-size: 1.5em;
     }
   }
 }
