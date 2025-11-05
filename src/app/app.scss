@@ -13,6 +13,8 @@ $accent: #F9DD69;
 .btn {
   // give buttons pointer cursor
   cursor: pointer;
+  // disable touch zoom
+  touch-action: manipulation
 }
 
 .score-app {
