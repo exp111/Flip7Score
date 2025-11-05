@@ -1,0 +1,144 @@
+$bg: #87CAC7;
+$panel: #FEF6DC;
+$primary: #30348A;
+$accent: #F9DD69;
+
+:host {
+  height: 100%;
+  display: flex;
+  background-color: #30CED5;
+}
+
+.score-app {
+  // take up all space
+  flex-grow: 1;
+  // margin to the sides
+  margin: 0.2rem;
+  // flex
+  display: flex;
+  flex-direction: column;
+  // base bg
+  background: $bg;
+  // border
+  border-radius: 16px;
+  border: 2px solid $primary;
+  // inside padding
+  padding: 16px;
+  gap: 16px;
+}
+
+.panel {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
+}
+
+.top-controls {
+  background: $primary;
+  padding: 8px;
+
+  border-radius: 4px 4px 0 0;
+
+  display: flex;
+  gap: 6px;
+  align-items: center;
+
+  .tab {
+    flex: 1;
+    border: none;
+    background: #e1eff7;
+    padding: 6px;
+    border-radius: 6px;
+    font-weight: bold;
+    &.active {
+      background: $primary;
+      color: white;
+    }
+  }
+
+  .round-nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .nav {
+      border: none;
+      background: #e1eff7;
+      border-radius: 4px;
+      padding: 4px 6px;
+      cursor: pointer;
+    }
+  }
+}
+
+.players {
+  background: $panel;
+  flex-grow: 1;
+  padding: 15px;
+  border-radius: 0 0 4px 4px;
+
+  .player-row {
+    display: grid;
+    grid-template-columns: 60px 40px 30px 1fr;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .avatar {
+    width: 50px;
+    height: 50px;
+    background: #d7ccf7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .avatar.dark {
+    background: #57525c;
+    color: white;
+  }
+
+  .score {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .plus {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .input {
+    height: 34px;
+    border: 2px solid #e9e9c8;
+    border-radius: 6px;
+  }
+}
+
+.bottom-controls {
+  display: flex;
+  justify-content: space-between;
+
+  .btn {
+    border: none;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 10px 12px;
+    cursor: pointer;
+  }
+
+  .primary {
+    background: $primary;
+    color: white;
+  }
+
+  .info {
+    background: #d4f0f2;
+  }
+}
