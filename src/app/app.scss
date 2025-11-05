@@ -134,13 +134,18 @@ $accent: #F9DD69;
     width: 75%;
     background: none;
     padding: 16.5px 14px;
+    border: 2px solid #C0C0A1;
+    border-radius: 4px;
     // text
     font-size: 22px;
     font-weight: bold;
     text-align: center;
+    font-family: inherit;
 
     &:focus {
-      outline: $primary;
+      border-width: 2px;
+      border-color: $primary;
+      outline: none;
     }
   }
 }
