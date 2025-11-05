@@ -3,6 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {DigitOnlyDirective} from './digit-only';
 
 interface Player {
+  editing: boolean;
   name: string;
   score: number;
   color: string;
@@ -21,20 +22,7 @@ interface Player {
 export class App {
   winningScore = 200;
   selectedRound = 1;
-  players: Player[] = [
-    {
-      name: "Jane",
-      score: 160,
-      color: "#9183A5",
-      roundScores: [null]
-    },
-    {
-      name: "Tim",
-      score: 60,
-      color: "#585A65",
-      roundScores: [null]
-    }
-  ];
+  players: Player[] = [];
   // show total/missing score
   showMissingScore = false;
 
@@ -68,5 +56,39 @@ export class App {
   // refreshes the total score by counting up the single round scores
   updateScore(player: Player) {
     player.score = player.roundScores.reduce((a,b) => (a ?? 0) + (b ?? 0))!;
+  }
+
+  generateColor() {
+    const r = Math.floor((Math.random() * 127) + 127);
+    const g = Math.floor((Math.random() * 127) + 127);
+    const b = Math.floor((Math.random() * 127) + 127);
+
+    return "#" +
+      r.toString(16).padStart(2, "0") +
+      g.toString(16).padStart(2, "0") +
+      b.toString(16).padStart(2, "0");
+  }
+
+  addPlayer() {
+    this.players.push({
+      editing: true,
+      name: '',
+      score: 0,
+      color: this.generateColor(),
+      roundScores: new Array(this.selectedRound).fill(null)
+    });
+  }
+
+  savePlayer(player: Player) {
+    // if name empty, remove player
+    if (!player.name) {
+     let index = this.players.indexOf(player);
+     if (index >= 0) {
+       // delete player
+       this.players.splice(index, 1);
+     }
+    } else {
+      player.editing = false;
+    }
   }
 }

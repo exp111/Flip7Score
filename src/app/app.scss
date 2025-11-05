@@ -101,6 +101,7 @@ $accent: #F9DD69;
 }
 
 .players {
+  //TODO: fix overflow scroll
   background: $panel;
   // take up all space
   flex-grow: 1;
@@ -112,13 +113,40 @@ $accent: #F9DD69;
   padding: 16px;
 
   .player-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    place-items: center;
+    display: flex;
+    align-items: center;
+  }
+
+  .name-edit {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+
+    input {
+      width: 75%;
+      background: none;
+      padding: 16.5px 14px;
+      border: 2px solid #C0C0A1;
+      border-radius: 4px;
+      // text
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      font-family: inherit;
+      text-transform: uppercase;
+    }
+    .btn {
+      width: 25%;
+      text-transform: uppercase;
+      color: $primary;
+      background: none;
+      border: 1px solid $primary;
+      border-radius: 4px;
+    }
   }
 
   .avatar {
-    width: 4rem;
+    width: 25%;
     height: 4rem;
     // round
     border-radius: 50%;
@@ -134,12 +162,14 @@ $accent: #F9DD69;
   }
 
   .score {
+    width: 25%;
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
   }
 
   .input {
-    width: 75%;
+    width: 50%;
     background: none;
     padding: 16.5px 14px;
     border: 2px solid #C0C0A1;
