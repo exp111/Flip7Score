@@ -51,8 +51,8 @@ $accent: #F9DD69;
   align-items: center;
 
   & > .btn {
-    flex: 1;
-    border: none;
+    width: 50%;
+    border: 2px solid transparent;
     background: $bg;
     color: $panel;
     padding: 6px;
@@ -66,8 +66,11 @@ $accent: #F9DD69;
   }
 
   .round-nav {
-    margin-left: auto;
+    // take up remaining space
+    flex-grow: 1;
+    //
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 4px;
 

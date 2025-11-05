@@ -19,6 +19,7 @@ interface Player {
   styleUrl: './app.scss'
 })
 export class App {
+  winningScore = 200;
   selectedRound = 1;
   players: Player[] = [
     {
@@ -34,9 +35,15 @@ export class App {
       roundScores: [null]
     }
   ];
+  // show total/missing score
+  showMissingScore = false;
 
   constructor() {
     (window as any).app = this;
+  }
+
+  changeScoreDisplay() {
+    this.showMissingScore = !this.showMissingScore;
   }
 
   changeRound(diff: number) {

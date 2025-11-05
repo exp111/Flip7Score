@@ -1,10 +1,11 @@
 <div class="score-app">
   <div class="panel">
     <div class="top-controls">
-      <!-- TODO: remove this? -->
-      <button class="btn active">Initials</button>
-      <!--TODO: add functionality to toggle between current total/missing -->
-      <button class="btn">Total</button>
+      <button class="btn"
+              [class.active]="showMissingScore"
+              (click)="changeScoreDisplay()">
+        {{ showMissingScore ? 'Missing' : 'Total' }}
+      </button>
 
       <div class="round-nav">
         <button class="btn" type="button" (click)="changeRound(-1)">
@@ -12,7 +13,7 @@
             <path d="M17.77 3.77 16 2 6 12l10 10 1.77-1.77L9.54 12z"></path>
           </svg>
         </button>
-        <span class="status">Round {{selectedRound}}</span>
+        <span class="status">Round {{ selectedRound }}</span>
         <button class="btn" (click)="changeRound(1)">
           <svg>
             <path d="M6.23 20.23 8 22l10-10L8 2 6.23 3.77 14.46 12z"></path>
@@ -26,7 +27,7 @@
         <div class="player-row">
           <div class="avatar" [style.background]="player.color">{{ player.name }}</div>
           <div class="score">
-            {{ player.score }}
+            {{ showMissingScore ? winningScore - player.score : player.score }}
           </div>
           <input class="input" type="number"
                  digitOnly
