@@ -95,7 +95,7 @@ $accent: #F9DD69;
 .players {
   background: $panel;
   flex-grow: 1;
-  padding: 15px;
+  padding: 16px;
   border-radius: 0 0 4px 4px;
 
   .player-row {
@@ -106,19 +106,18 @@ $accent: #F9DD69;
   }
 
   .avatar {
-    width: 50px;
-    height: 50px;
-    background: #d7ccf7;
+    width: 4rem;
+    height: 4rem;
+    // round
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    // font
     font-weight: bold;
-  }
-
-  .avatar.dark {
-    background: #57525c;
-    color: white;
+    color: $panel;
+    font-size: 19px;
+    letter-spacing: 0.15rem;
   }
 
   .score {
