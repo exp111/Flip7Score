@@ -94,17 +94,19 @@ $accent: #F9DD69;
 
 .players {
   background: $panel;
+  // take up all space
   flex-grow: 1;
-  padding: 16px;
+  // bottom rounded
   border-radius: 0 0 4px 4px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 16px;
 
   .player-row {
-    display: flex;
-    gap: 16px;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    place-items: center;
   }
 
   .avatar {
@@ -128,16 +130,10 @@ $accent: #F9DD69;
     font-weight: bold;
   }
 
-  .plus {
-    font-size: 26px;
-    font-weight: bold;
-    text-align: center;
-  }
-
   .input {
-    width: 100%;
-    padding: 16.5px 14px;
+    width: 75%;
     background: none;
+    padding: 16.5px 14px;
     // text
     font-size: 22px;
     font-weight: bold;
