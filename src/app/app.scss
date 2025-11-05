@@ -10,6 +10,11 @@ $accent: #F9DD69;
   font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+.btn {
+  // give buttons pointer cursor
+  cursor: pointer;
+}
+
 .score-app {
   // take up all space
   flex-grow: 1;

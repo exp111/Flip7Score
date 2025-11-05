@@ -13,6 +13,7 @@ interface Player {
   styleUrl: './app.scss'
 })
 export class App {
+  selectedRound = 1;
   players: Player[] = [
     {
       name: "Jane",
@@ -25,4 +26,12 @@ export class App {
       color: "#585A65"
     }
   ];
+
+  changeRound(diff: number) {
+    // dont allow under 1
+    if (this.selectedRound + diff < 1) {
+      return;
+    }
+    this.selectedRound += diff;
+  }
 }
