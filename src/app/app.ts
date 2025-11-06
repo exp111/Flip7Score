@@ -4,6 +4,7 @@ import {DigitOnlyDirective} from './digit-only';
 
 interface Player {
   editing: boolean;
+  deleting: boolean;
   name: string;
   score: number;
   color: string;
@@ -72,6 +73,7 @@ export class App {
   addPlayer() {
     this.players.push({
       editing: true,
+      deleting: false,
       name: '',
       score: 0,
       color: this.generateColor(),
@@ -79,14 +81,26 @@ export class App {
     });
   }
 
+  startDeletingPlayer(player: Player) {
+    player.deleting = true;
+  }
+
+  cancelDeletingPlayer(player: Player) {
+    player.deleting = false;
+  }
+
+  deletePlayer(player: Player) {
+    let index = this.players.indexOf(player);
+    if (index >= 0) {
+      // delete player
+      this.players.splice(index, 1);
+    }
+  }
+
   savePlayer(player: Player) {
     // if name empty, remove player
     if (!player.name) {
-     let index = this.players.indexOf(player);
-     if (index >= 0) {
-       // delete player
-       this.players.splice(index, 1);
-     }
+     this.deletePlayer(player);
     } else {
       player.editing = false;
     }

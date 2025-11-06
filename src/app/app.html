@@ -32,18 +32,29 @@
             </div>
           } @else {
             <div class="avatar-container">
-              <div class="avatar" [style.background]="player.color">{{ player.name }}</div>
+              <div class="avatar"
+                   [style.background]="player.color"
+                   (click)="startDeletingPlayer(player)">
+                {{ player.name }}
+              </div>
             </div>
-            <!-- TODO: add score circle -->
-            <div class="score">
-              {{ showMissingScore ? winningScore - player.score : player.score }}
-            </div>
-            <input class="input" type="number"
-                   digitOnly
-                   maxLength="3"
-                   inputmode="numeric"
-                   [(ngModel)]="player.roundScores[selectedRound]"
-                   (ngModelChange)="updateScore(player)"/>
+            @if (player.deleting) {
+              <div class="player-delete">
+                <button class="btn" (click)="cancelDeletingPlayer(player)">Cancel</button>
+                <button class="btn" (click)="deletePlayer(player)">Remove</button>
+              </div>
+            } @else {
+              <!-- TODO: add score circle -->
+              <div class="score">
+                {{ showMissingScore ? winningScore - player.score : player.score }}
+              </div>
+              <input class="round-score" type="number"
+                     digitOnly
+                     maxLength="3"
+                     inputmode="numeric"
+                     [(ngModel)]="player.roundScores[selectedRound]"
+                     (ngModelChange)="updateScore(player)"/>
+            }
           }
         </div>
       }
