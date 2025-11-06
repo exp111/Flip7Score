@@ -4,6 +4,7 @@ import {DigitOnlyDirective} from './digit-only';
 import {interval, map, Observable, startWith, Subject, takeUntil} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {TimeFormatPipe} from './time-format.pipe';
+import {CircleProgressComponent} from './circle-progress/circle-progress.component';
 
 interface Player {
   editing: boolean;
@@ -19,7 +20,8 @@ interface Player {
     FormsModule,
     DigitOnlyDirective,
     AsyncPipe,
-    TimeFormatPipe
+    TimeFormatPipe,
+    CircleProgressComponent
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

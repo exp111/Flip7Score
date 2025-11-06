@@ -39,9 +39,7 @@
               </div>
             </div>
             <!-- TODO: add score circle -->
-            <div class="score">
-              {{ showMissingScore ? winningScore - player.score : player.score }}
-            </div>
+            <app-circle-progress [max]="winningScore" [value]="player.score" [showMissing]="showMissingScore"></app-circle-progress>
             <input class="round-score" type="number"
                    digitOnly
                    maxLength="3"
