@@ -62,6 +62,9 @@
         Start Game
       }
     </button>
+    @if (startTime && !gameActive) {
+      <button class="btn primary" (click)="exportPlay()">Export</button>
+    }
     <button class="btn primary" (click)="addPlayer()">Add Player</button>
   </footer>
 </div>

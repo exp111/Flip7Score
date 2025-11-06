@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {DigitOnlyDirective} from './digit-only';
 import {interval, map, Observable, startWith, Subject, takeUntil} from 'rxjs';
-import {AsyncPipe} from '@angular/common';
+import {AsyncPipe, DatePipe} from '@angular/common';
 import {TimeFormatPipe} from './time-format.pipe';
 import {CircleProgressComponent} from './circle-progress/circle-progress.component';
 
@@ -139,5 +139,39 @@ export class App {
       player.score = 0;
       player.roundScores.fill(null);
     }
+  }
+
+  generateExportData() {
+    let ranked = this.players.sort((a, b) => b.score - a.score);
+    return {
+      "board": "",
+      "durationMin": Math.floor((Date.now() - this.startTime!) / 1000 / 60),
+      "comments": "",
+      "game": {
+        "bggId": 420087,
+        "highestWins": true,
+        "name": "Flip 7",
+        "noPoints": false,
+        "sourceGameId": "0" //TODO: do we need this?
+      },
+      "location": "Home",
+      "playDate": new Date(this.startTime!).toISOString().slice(0, 19).replace('T', ' '),
+      "players": this.players.map(p => ({
+        "startPlayer": false,
+        "name": p.name,
+        "rank": ranked.indexOf(p) + 1,
+        "role": "",
+        "score": p.score,
+        "sourcePlayerId": p.name,
+        "winner": ranked[0].score == p.score
+      })),
+      "sourceName": "Flip 7 Score",
+      "sourcePlayId": "0" //TODO: needed?
+    };
+  }
+
+  exportPlay() {
+    let data = this.generateExportData();
+    window.open(`bgstats://app.bgstatsapp.com/createPlay.html?data=${JSON.stringify(data)}`)
   }
 }
