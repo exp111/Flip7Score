@@ -141,8 +141,13 @@ export class App {
     }
   }
 
+  pad(n: number) {
+    return n.toString().padStart(2, "0");
+  }
+
   generateExportData() {
     let ranked = this.players.sort((a, b) => b.score - a.score);
+    let date = new Date(this.startTime!);
     return {
       "board": "",
       "durationMin": Math.floor((Date.now() - this.startTime!) / 1000 / 60),
@@ -155,7 +160,7 @@ export class App {
         "sourceGameId": "0" //TODO: do we need this?
       },
       "location": "Home",
-      "playDate": new Date(this.startTime!).toISOString().slice(0, 19).replace('T', ' '),
+      "playDate": `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())} ${this.pad(date.getHours())}:${this.pad(date.getMinutes())}:${this.pad(date.getSeconds())}`,
       "players": this.players.map(p => ({
         "startPlayer": false,
         "name": p.name,
