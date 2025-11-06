@@ -4,11 +4,10 @@ import {DigitOnlyDirective} from './digit-only';
 
 interface Player {
   editing: boolean;
-  deleting: boolean;
   name: string;
   score: number;
   color: string;
-  roundScores: (number|null)[];
+  roundScores: (number | null)[];
 }
 
 @Component({
@@ -56,7 +55,7 @@ export class App {
 
   // refreshes the total score by counting up the single round scores
   updateScore(player: Player) {
-    player.score = player.roundScores.reduce((a,b) => (a ?? 0) + (b ?? 0))!;
+    player.score = player.roundScores.reduce((a, b) => (a ?? 0) + (b ?? 0))!;
   }
 
   generateColor() {
@@ -73,7 +72,6 @@ export class App {
   addPlayer() {
     this.players.push({
       editing: true,
-      deleting: false,
       name: '',
       score: 0,
       color: this.generateColor(),
@@ -81,12 +79,8 @@ export class App {
     });
   }
 
-  startDeletingPlayer(player: Player) {
-    player.deleting = true;
-  }
-
-  cancelDeletingPlayer(player: Player) {
-    player.deleting = false;
+  editPlayer(player: Player) {
+    player.editing = true;
   }
 
   deletePlayer(player: Player) {
@@ -100,7 +94,7 @@ export class App {
   savePlayer(player: Player) {
     // if name empty, remove player
     if (!player.name) {
-     this.deletePlayer(player);
+      this.deletePlayer(player);
     } else {
       player.editing = false;
     }

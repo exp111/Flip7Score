@@ -176,22 +176,6 @@ $accent: #F9DD69;
     }
   }
 
-  // Delete buttons
-  .player-delete {
-    width: 75%;
-    display: flex;
-    justify-content: space-evenly;
-
-    .btn {
-      padding: 16.5px 14px;
-      text-transform: uppercase;
-      color: $primary;
-      background: none;
-      border: 1px solid $primary;
-      border-radius: 4px;
-    }
-  }
-
   // Score
   .score {
     width: 25%;
