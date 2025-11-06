@@ -32,6 +32,7 @@
             </div>
           } @else {
             <div class="avatar" [style.background]="player.color">{{ player.name }}</div>
+            <!-- TODO: add score circle -->
             <div class="score">
               {{ showMissingScore ? winningScore - player.score : player.score }}
             </div>

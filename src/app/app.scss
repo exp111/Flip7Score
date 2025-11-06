@@ -20,8 +20,8 @@ $accent: #F9DD69;
 .score-app {
   // take up all space
   flex-grow: 1;
-  // margin to the sides
-  margin: 0.2rem;
+  // margin to the sides; bottom has bigger margin for mobile
+  margin: 0.2rem 0.2rem 1.2rem 0.2rem;
   // flex
   display: flex;
   flex-direction: column;
