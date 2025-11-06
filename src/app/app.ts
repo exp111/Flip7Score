@@ -30,6 +30,7 @@ export class App {
   winningScore = 200;
   selectedRound = 1;
   players: Player[] = [];
+  gameActive = false;
   startTime: number | null = null;
   stopTimer = new Subject<void>();
   elapsedTime?: Observable<number>;
@@ -69,11 +70,17 @@ export class App {
   }
 
   startGame() {
+    if (this.startTime) {
+      // if game was restarted reset score
+      this.resetScores();
+    }
     this.createTimer();
+    this.gameActive = true;
   }
 
   stopGame() {
     this.stopTimer.next();
+    this.gameActive = false;
   }
 
   createTimer() {
@@ -124,6 +131,13 @@ export class App {
       this.deletePlayer(player);
     } else {
       player.editing = false;
+    }
+  }
+
+  resetScores() {
+    for (let player of this.players) {
+      player.score = 0;
+      player.roundScores.fill(null);
     }
   }
 }

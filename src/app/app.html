@@ -38,8 +38,10 @@
                 {{ player.name }}
               </div>
             </div>
-            <!-- TODO: add score circle -->
-            <app-circle-progress [max]="winningScore" [value]="player.score" [showMissing]="showMissingScore"></app-circle-progress>
+            <app-circle-progress [max]="winningScore"
+                                 [value]="player.score"
+                                 [showMissing]="showMissingScore">
+            </app-circle-progress>
             <input class="round-score" type="number"
                    digitOnly
                    maxLength="3"
@@ -53,11 +55,13 @@
   </div>
 
   <footer class="bottom-controls">
-    @if (startTime) {
-      <button class="btn primary" (click)="stopGame()">{{elapsedTime | async | timeFormat }}</button>
-    } @else {
-      <button class="btn primary" (click)="startGame()">Start Game</button>
-    }
+    <button class="btn primary" (click)="gameActive ? stopGame() : startGame()">
+      @if (startTime) {
+        {{ elapsedTime | async | timeFormat }}
+      } @else {
+        Start Game
+      }
+    </button>
     <button class="btn primary" (click)="addPlayer()">Add Player</button>
   </footer>
 </div>
