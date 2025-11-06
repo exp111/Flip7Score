@@ -147,8 +147,18 @@ $accent: #F9DD69;
     }
   }
 
-  .avatar {
+  .avatar-container {
+    // takes up 1/4 of the flexbox
     width: 25%;
+    height: 100%;
+    // center horizontally
+    display: flex;
+    justify-content: center;
+  }
+
+  .avatar {
+    // fixed width so its a circle
+    width: 4rem;
     height: 100%;
     // round
     border-radius: 50%;
