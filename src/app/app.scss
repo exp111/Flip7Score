@@ -149,12 +149,14 @@ $accent: #F9DD69;
 
   .avatar {
     width: 25%;
-    height: 4rem;
+    height: 100%;
     // round
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    // dont make avatar bigger if text is too long
+    overflow: hidden;
     // text
     text-transform: uppercase;
     font-weight: bold;
