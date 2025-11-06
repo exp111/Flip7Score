@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {DigitOnlyDirective} from './digit-only';
+import {interval, map, Observable, startWith, Subject, takeUntil} from 'rxjs';
+import {AsyncPipe} from '@angular/common';
+import {TimeFormatPipe} from './time-format.pipe';
 
 interface Player {
   editing: boolean;
@@ -14,7 +17,9 @@ interface Player {
   selector: 'app-root',
   imports: [
     FormsModule,
-    DigitOnlyDirective
+    DigitOnlyDirective,
+    AsyncPipe,
+    TimeFormatPipe
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
@@ -23,6 +28,9 @@ export class App {
   winningScore = 200;
   selectedRound = 1;
   players: Player[] = [];
+  startTime: number | null = null;
+  stopTimer = new Subject<void>();
+  elapsedTime?: Observable<number>;
   // show total/missing score
   showMissingScore = false;
 
@@ -56,6 +64,23 @@ export class App {
   // refreshes the total score by counting up the single round scores
   updateScore(player: Player) {
     player.score = player.roundScores.reduce((a, b) => (a ?? 0) + (b ?? 0))!;
+  }
+
+  startGame() {
+    this.createTimer();
+  }
+
+  stopGame() {
+    this.stopTimer.next();
+  }
+
+  createTimer() {
+    this.startTime = Date.now();
+    this.elapsedTime = interval(100).pipe( // update every 100 ms
+      startWith(0),
+      takeUntil(this.stopTimer),
+      map(() => (Date.now() - this.startTime!) / 1000)
+    );
   }
 
   generateColor() {

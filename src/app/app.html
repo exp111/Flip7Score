@@ -55,7 +55,11 @@
   </div>
 
   <footer class="bottom-controls">
-    <button class="btn primary">New Game</button>
+    @if (startTime) {
+      <button class="btn primary" (click)="stopGame()">{{elapsedTime | async | timeFormat }}</button>
+    } @else {
+      <button class="btn primary" (click)="startGame()">Start Game</button>
+    }
     <button class="btn primary" (click)="addPlayer()">Add Player</button>
   </footer>
 </div>
