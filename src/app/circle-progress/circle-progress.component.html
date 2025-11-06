@@ -12,12 +12,12 @@
     <!-- fg -->
     <path
       class="circle-progress"
-      [attr.stroke-dasharray]="percent + ', 100'"
+      [attr.stroke-dasharray]="percent() + ', 100'"
       d="M18 2.0845
          a 15.9155 15.9155 0 0 1 0 31.831
          a 15.9155 15.9155 0 0 1 0 -31.831"
     />
   </svg>
 
-  <div class="circle-value">{{ showMissing ? max - value : value }}</div>
+  <div class="circle-value">{{ showMissing() ? max() - value() : value() }}</div>
 </div>

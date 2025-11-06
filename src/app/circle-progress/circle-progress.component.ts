@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {booleanAttribute, Component, computed, input, numberAttribute} from '@angular/core';
 
 @Component({
   selector: 'app-circle-progress',
@@ -6,11 +6,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./circle-progress.component.scss']
 })
 export class CircleProgressComponent {
-  @Input() value = 0;
-  @Input() max = 120;
-  @Input() showMissing = false;
+  value = input.required({transform: numberAttribute});
+  max = input.required({transform: numberAttribute});
+  showMissing = input(false, {transform: booleanAttribute});
 
-  get percent() {
-    return Math.min(100, Math.max(0, (this.value / this.max) * 100));
-  }
+  percent = computed(() =>
+    Math.min(100,
+      Math.max(0, (this.value() / this.max()) * 100)));
 }
