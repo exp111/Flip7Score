@@ -146,18 +146,21 @@ export class App {
   }
 
   generateExportData() {
+    if (!this.startTime) {
+      return;
+    }
     let ranked = this.players.sort((a, b) => b.score - a.score);
-    let date = new Date(this.startTime!);
+    let date = new Date(this.startTime);
     return {
       "board": "",
-      "durationMin": Math.floor((Date.now() - this.startTime!) / 1000 / 60),
+      "durationMin": Math.floor((Date.now() - this.startTime) / 1000 / 60),
       "comments": "",
       "game": {
         "bggId": 420087,
         "highestWins": true,
         "name": "Flip 7",
         "noPoints": false,
-        "sourceGameId": "0" //TODO: do we need this?
+        "sourceGameId": "FLIP7"
       },
       "location": "Home",
       "playDate": `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())} ${this.pad(date.getHours())}:${this.pad(date.getMinutes())}:${this.pad(date.getSeconds())}`,
@@ -171,7 +174,7 @@ export class App {
         "winner": ranked[0].score == p.score
       })),
       "sourceName": "Flip 7 Score",
-      "sourcePlayId": "0" //TODO: needed?
+      "sourcePlayId": this.startTime!.toString()
     };
   }
 
