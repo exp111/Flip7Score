@@ -149,7 +149,8 @@ export class App {
     if (!this.startTime) {
       return;
     }
-    let ranked = this.players.sort((a, b) => b.score - a.score);
+    // calculate rank according to score. ties take the first occurrence (as its sorted, the first place of the tie)
+    let ranked = this.players.map(p => p.score).sort((a, b) => b - a);
     let date = new Date(this.startTime);
     return {
       "board": "",
@@ -167,11 +168,11 @@ export class App {
       "players": this.players.map(p => ({
         "startPlayer": false,
         "name": p.name,
-        "rank": ranked.indexOf(p) + 1,
+        "rank": ranked.indexOf(p.score) + 1,
         "role": "",
         "score": p.score,
         "sourcePlayerId": p.name,
-        "winner": ranked[0].score == p.score
+        "winner": ranked[0] == p.score
       })),
       "sourceName": "Flip 7 Score",
       "sourcePlayId": this.startTime!.toString()
