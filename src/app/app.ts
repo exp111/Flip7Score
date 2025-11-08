@@ -135,6 +135,7 @@ export class App {
   }
 
   resetScores() {
+    this.selectedRound = 1;
     for (let player of this.players) {
       player.score = 0;
       player.roundScores.fill(null);
