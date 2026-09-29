@@ -8,7 +8,7 @@ export class DigitOnlyDirective {
     transform: numberAttribute
   });
 
-  private regex: RegExp = new RegExp(/^[0-9]$/); // einzelne Ziffer
+  private regex: RegExp = new RegExp(/^[0-9\-]$/); // negative numbers + -
   private specialKeys: string[] = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'];
   private controlCombos: string[] = ['a', 'c', 'v', 'x'];
 
