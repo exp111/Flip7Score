@@ -64,8 +64,12 @@
       }
     </button>
     @if (startTime && !gameActive) {
-      <button class="btn primary" (click)="exportPlay()">Export</button>
+      <button class="btn primary" (click)="showExportModal()">Export</button>
     }
     <button class="btn primary" (click)="addPlayer()">Add Player</button>
   </footer>
 </div>
+<dialog class="export-dialog" #exportDialog>
+  <button class="btn primary" (click)="exportPlay(Game.FLIP7)">Flip 7</button>
+  <button class="btn primary" (click)="exportPlay(Game.FLIP7_VENGEANCE)">Flip 7: With A Vengeance</button>
+</dialog>

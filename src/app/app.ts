@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, ElementRef, inject, viewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {DigitOnlyDirective} from './digit-only';
 import {interval, map, Observable, startWith, Subject, takeUntil} from 'rxjs';
@@ -12,6 +12,22 @@ interface Player {
   score: number;
   color: string;
   roundScores: (number | null)[];
+}
+
+enum Game {
+  FLIP7,
+  FLIP7_VENGEANCE
+}
+
+const gameData: Record<Game, { id: number, name: string }> = {
+  [Game.FLIP7]: {
+    id: 420087,
+    name: "Flip 7"
+  },
+  [Game.FLIP7_VENGEANCE]: {
+    id: 463441,
+    name: "Flip 7: With A Vengeance"
+  }
 }
 
 @Component({
@@ -36,6 +52,8 @@ export class App {
   elapsedTime?: Observable<number>;
   // show total/missing score
   showMissingScore = false;
+
+  exportDialog = viewChild.required<ElementRef<HTMLDialogElement>>("exportDialog");
 
   constructor() {
     (window as any).app = this;
@@ -146,7 +164,7 @@ export class App {
     return n.toString().padStart(2, "0");
   }
 
-  generateExportData() {
+  generateExportData(game: Game) {
     if (!this.startTime) {
       return;
     }
@@ -158,11 +176,11 @@ export class App {
       "durationMin": Math.floor((Date.now() - this.startTime) / 1000 / 60),
       "comments": "",
       "game": {
-        "bggId": 420087,
+        "bggId": gameData[game].id,
         "highestWins": true,
-        "name": "Flip 7",
+        "name": gameData[game].name,
         "noPoints": false,
-        "sourceGameId": "FLIP7"
+        "sourceGameId": `FLIP7-${Date.now()}`
       },
       "location": "Home",
       "playDate": `${date.getFullYear()}-${this.pad(date.getMonth() + 1)}-${this.pad(date.getDate())} ${this.pad(date.getHours())}:${this.pad(date.getMinutes())}:${this.pad(date.getSeconds())}`,
@@ -180,10 +198,15 @@ export class App {
     };
   }
 
-  exportPlay() {
-    let data = this.generateExportData();
-    //TODO: show modal for game selection
-    window.open(`bgstats://app.bgstatsapp.com/createPlay.html?data=${JSON.stringify(data)}`)
+  showExportModal() {
+    this.exportDialog().nativeElement.show();
+  }
+
+  exportPlay(game: Game) {
+    this.exportDialog().nativeElement.close();
+    let data = this.generateExportData(game);
+    window.open(`bgstats://app.bgstatsapp.com/createPlay.html?data=${JSON.stringify(data)}`);
+    console.debug(data);
   }
 
   negateNumber(player: Player, selectedRound: number) {
@@ -192,4 +215,6 @@ export class App {
       this.updateScore(player);
     }
   }
+
+  protected readonly Game = Game;
 }
