@@ -42,11 +42,10 @@
                                  [value]="player.score"
                                  [showMissing]="showMissingScore">
             </app-circle-progress>
-            <!-- tel also shows - button -->
             <input class="round-score" type="number"
                    digitOnly
                    maxLength="3"
-                   inputmode="tel"
+                   pattern="[0-9\-]*"
                    [(ngModel)]="player.roundScores[selectedRound]"
                    (ngModelChange)="updateScore(player)"/>
           }
