@@ -40,12 +40,13 @@
             </div>
             <app-circle-progress [max]="winningScore"
                                  [value]="player.score"
-                                 [showMissing]="showMissingScore">
+                                 [showMissing]="showMissingScore"
+                                 (click)="negateNumber(player, selectedRound)">
             </app-circle-progress>
             <input class="round-score" type="number"
                    digitOnly
                    maxLength="3"
-                   pattern="[0-9\-]*"
+                   inputmode="numeric"
                    [(ngModel)]="player.roundScores[selectedRound]"
                    (ngModelChange)="updateScore(player)"/>
           }

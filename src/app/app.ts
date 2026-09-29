@@ -182,6 +182,14 @@ export class App {
 
   exportPlay() {
     let data = this.generateExportData();
+    //TODO: show modal for game selection
     window.open(`bgstats://app.bgstatsapp.com/createPlay.html?data=${JSON.stringify(data)}`)
+  }
+
+  negateNumber(player: Player, selectedRound: number) {
+    if (player.roundScores[selectedRound]) {
+      player.roundScores[selectedRound] *= -1;
+      this.updateScore(player);
+    }
   }
 }
